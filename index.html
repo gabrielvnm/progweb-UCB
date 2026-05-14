@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Loja Tech | Produtos genéricos</title>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- header with login top right -->
+    <div class="store-header">
+        <div class="brand">
+            <h1>⚡ Loja Genérica</h1>
+            <span class="brand-tag">Informática</span>
+        </div>
+        <button class="login-btn" id="openLoginBtn">
+            🔐 Login
+        </button>
+    </div>
+
+    
+    <div>
+        <div class="section-title">✨ Produtos ✨</div>
+        <div class="products-grid" id="productsContainer">
+            <!-- aqui vai ficar a lista de produtos -->
+        </div>
+    </div>
+    <footer>
+        🌟 demo
+    </footer>
+</div>
+
+<!-- login modal (popup) -->
+<div id="loginModal" class="modal-overlay">
+    <div class="login-modal">
+        <h3>🔑 Bem vindo!</h3>
+        <p>Conecte-se à sua conta!</p>
+        <div class="mock-input">
+            📧 fulano@email.com
+        </div>
+        <div class="mock-input">
+            🔒 ••••••••
+        </div>
+        <div class="demo-note">
+            💡 Conecte-se ou cadastre-se para continuar!
+        </div>
+        <button id="confirmLoginBtn" class="modal-login-action">🚀 Login </button>
+        <button id="closeModalBtn" class="close-modal">Cancelar</button>
+    </div>
+</div>
+
+<!-- toast message for login success -->
+<div id="loginToast" class="login-toast">
+    ✅ Sucesso no login! (Demo mode)
+</div>
+
+<!-- <script>
+    // ---------- lista de produtos ----------
+    const products = [
+        {
+            id: 1,
+            name: "Macbook Pro",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 1899,
+            currency: "BRL",
+            icon: "💻"
+        },
+        {
+            id: 2,
+            name: "Fone de Ouvido",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 249,
+            currency: "BRL",
+            icon: "🎧"
+        },
+        {
+            id: 3,
+            name: "Relógio",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 399,
+            currency: "BRL",
+            icon: "⌚"
+        },
+        {
+            id: 4,
+            name: "Tablet",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 1099,
+            currency: "BRL",
+            icon: "📱"
+        },
+        {
+            id: 5,
+            name: "Robô drone",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 749,
+            currency: "BRL",
+            icon: "🚁"
+        },
+        {
+            id: 6,
+            name: "Powerbank",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 89,
+            currency: "BRL",
+            icon: "⚡"
+        },
+        {
+            id: 7,
+            name: "Teclado",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 159,
+            currency: "BRL",
+            icon: "⌨️"
+        },
+        {
+            id: 8,
+            name: "Monitor",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            price: 1299,
+            currency: "BRL",
+            icon: "🖥️"
+        }
+    ];
+
+    // Helper: format price
+    function formatPrice(price, currency) {
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: currency, minimumFractionDigits: 0 }).format(price);
+    }
+
+    // Render product grid
+    const productsContainer = document.getElementById('productsContainer');
+
+    function renderProducts() {
+        if (!productsContainer) return;
+        productsContainer.innerHTML = '';
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.setAttribute('data-id', product.id);
+            
+            // icon
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'product-icon';
+            iconDiv.textContent = product.icon;
+            
+            // title
+            const titleEl = document.createElement('h3');
+            titleEl.className = 'product-title';
+            titleEl.textContent = product.name;
+            
+            // description
+            const descEl = document.createElement('p');
+            descEl.className = 'product-desc';
+            descEl.textContent = product.desc;
+            
+            // price
+            const priceEl = document.createElement('div');
+            priceEl.className = 'price';
+            priceEl.innerHTML = `${formatPrice(product.price, product.currency)} <small>${product.currency ===   'BRL' ? '+ frete' : ''}</small>`;
+            
+            // buy button
+            const buyBtn = document.createElement('button');
+            buyBtn.className = 'buy-btn';
+            buyBtn.innerHTML = '🛒 Comprar';
+            buyBtn.setAttribute('data-product-name', product.name);
+            buyBtn.setAttribute('data-product-price', product.price);
+            
+            // Append all
+            card.appendChild(iconDiv);
+            card.appendChild(titleEl);
+            card.appendChild(descEl);
+            card.appendChild(priceEl);
+            card.appendChild(buyBtn);
+            
+            productsContainer.appendChild(card);
+        });
+    }
+    
+    // ----- toast helper -----
+    let toastTimeout = null;
+    function showToastMessage(message, isSuccess = true) {
+        const toast = document.getElementById('loginToast');
+        if (!toast) return;
+        // customize message if needed, but we'll use generic or override
+        if (message) {
+            toast.textContent = message;
+        } else {
+            toast.textContent = "✅ Login concluído com sucesso! (Demo mode)";
+        }
+        toast.classList.add('show-toast');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show-toast');
+        }, 2800);
+    }
+    
+    // ----- LOGIN modal management -----
+    const modal = document.getElementById('loginModal');
+    const openLoginBtn = document.getElementById('openLoginBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const confirmLoginBtn = document.getElementById('confirmLoginBtn');
+    
+    // Flag for login state (simple demo)
+    let isLoggedIn = false;
+    
+    function openModal() {
+        if (modal) modal.classList.add('active-modal');
+    }
+    
+    function closeModal() {
+        if (modal) modal.classList.remove('active-modal');
+    }
+    
+    // login handler: sets logged in state, closes modal, shows toast, updates login button text
+    function performLogin() {
+        if (!isLoggedIn) {
+            isLoggedIn = true;
+            // update login button text & style (optional)
+            const loginButton = document.getElementById('openLoginBtn');
+            if (loginButton) {
+                loginButton.innerHTML = "👤 Dashboard";
+                loginButton.style.background = "linear-gradient(105deg, #0f6638, #0f5db3)";
+            }
+            showToastMessage("✅ Sucesso! Bem vindo à loja genérica!", true);
+        } else {
+            showToastMessage("🔐 Usuário logado!", true);
+        }
+        closeModal();
+    }
+    
+    // Event listeners for login
+    if (openLoginBtn) {
+        openLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn) {
+                showToastMessage("✨ Usuário Logado!", true);
+            } else {
+                openModal();
+            }
+        });
+    }
+    
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+            closeModal();
+        });
+    }
+    
+    if (confirmLoginBtn) {
+        confirmLoginBtn.addEventListener('click', () => {
+            performLogin();
+        });
+    }
+    
+    // Click outside modal to close (overlay click)
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // ----- BUY BUTTON LOGIC (with login requirement & simulated purchase)-----
+    // We'll attach event listeners dynamically after render or use event delegation
+    function handleBuy(productName, priceValue) {
+        if (!isLoggedIn) {
+            // Show toast: please login first
+            showToastMessage(`🔒 É necessário fazer o login para comprar ${productName}.`, false);
+            // Optional: open login modal after short delay?
+            openModal();
+            return;
+        }
+        // logged in -> simulate success purchase
+        const priceFormatted = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 }).format(priceValue);
+        showToastMessage(`🎉 Pedido de ${productName} por ${priceFormatted}! (demo checkout)`, true);
+    }
+    
+    // Use event delegation on products container for buy buttons (dynamic)
+    if (productsContainer) {
+        productsContainer.addEventListener('click', (e) => {
+            const buyButton = e.target.closest('.buy-btn');
+            if (!buyButton) return;
+            // find product name from parent card
+            const card = buyButton.closest('.product-card');
+            if (card) {
+                const titleElem = card.querySelector('.product-title');
+                const productName = titleElem ? titleElem.textContent : "this product";
+                // find price from the .price element
+                const priceElem = card.querySelector('.price');
+                let productPrice = 0;
+                if (priceElem) {
+                    const priceText = priceElem.innerText;
+                    const match = priceText.match(/\$?([\d,]+)/);
+                    if (match) {
+                        productPrice = parseInt(match[1].replace(/,/g, ''), 10);
+                    }
+                }
+                // for safety, fallback lookup in products array if needed
+                if (!productPrice) {
+                    const prod = products.find(p => p.name === productName);
+                    if (prod) productPrice = prod.price;
+                }
+                handleBuy(productName, productPrice);
+            } else {
+                // fallback
+                handleBuy("Tech item", 0);
+            }
+        });
+    }
+    
+    renderProducts();
+
+    console.log("Pagina carregada");
+</script> -->
+<script src="script.js"></script>
+</body>
+</html>

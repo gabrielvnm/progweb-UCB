@@ -1,0 +1,351 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, 'Segoe UI', 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(145deg, #343f34 0%, #498ed7 100%);
+    color: #0a2f2f;
+    min-height: 100vh;
+}
+
+/* --- main container & smooth layout --- */
+.page-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+}
+
+/* --- header + login button (top right) --- */
+.store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgba(0, 100, 80, 0.25);
+}
+
+.brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.brand h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0f6b3a, #1a73e8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.brand-tag {
+    background: rgba(26, 115, 232, 0.12);
+    padding: 0.25rem 0.85rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #0c5e2e;
+    border-left: 2px solid #2ecc71;
+}
+
+/* login button (green+blue styled) */
+.login-btn {
+    background: linear-gradient(105deg, #0e6b3a, #1e6ec5);
+    border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 12px rgba(0, 80, 70, 0.2);
+    backdrop-filter: blur(2px);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(105deg, #0a572f, #0f5db3);
+    box-shadow: 0 12px 20px -8px rgba(0, 110, 90, 0.4);
+}
+
+.login-btn:active {
+    transform: translateY(1px);
+}
+
+/* --- greeting / login modal simulation (clean toast style) --- */
+.login-toast {
+    visibility: hidden;
+    min-width: 260px;
+    background: #1f2a3e;
+    color: #eef5ff;
+    text-align: center;
+    border-radius: 50px;
+    padding: 12px 20px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.95rem;
+    font-weight: 500;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    background: rgba(15, 50, 40, 0.9);
+    border-left: 5px solid #2ecc71;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: visibility 0s, opacity 0.25s linear;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+.login-toast.show-toast {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --- product section grid --- */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 1rem 0 1.8rem 0;
+    display: inline-block;
+    background: rgba(30, 110, 197, 0.1);
+    padding: 0 1rem 0.3rem 1rem;
+    border-radius: 40px;
+    color: #cfddd6;
+    border-bottom: 2px solid #2ecc71;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+/* product card - green/blue accents */
+.product-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    border-radius: 32px;
+    padding: 1.5rem 1.2rem 1.8rem;
+    transition: transform 0.2s ease, box-shadow 0.25s;
+    box-shadow: 0 18px 30px -12px rgba(0, 40, 30, 0.12);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 36px -14px rgba(0, 86, 70, 0.25);
+    border-color: #2ecc71;
+    background: white;
+}
+
+.product-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.7rem;
+    background: #ecfdf3;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 58px;
+    text-align: center;
+    background: linear-gradient(120deg, #d9f0e3, #cde4ff);
+}
+
+.product-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0.25rem 0;
+    color: #0b3b2f;
+}
+
+.product-desc {
+    font-size: 0.85rem;
+    color: #2c5a4a;
+    margin: 0.4rem 0 0.8rem 0;
+    line-height: 1.4;
+    opacity: 0.85;
+}
+
+.price {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #1a6e3d;
+    margin: 0.5rem 0;
+    letter-spacing: -0.5px;
+}
+
+.price small {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #3a6b5b;
+}
+
+/* buy button - blue/green blend */
+.buy-btn {
+    background: linear-gradient(95deg, #1f7a48, #1e6ec5);
+    border: none;
+    padding: 0.8rem 1.2rem;
+    width: 100%;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.8rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.buy-btn:hover {
+    background: linear-gradient(95deg, #156336, #0f5ab3);
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* login modal dialog (simple elegant) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 35, 28, 0.7);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s ease;
+}
+
+.modal-overlay.active-modal {
+    visibility: visible;
+    opacity: 1;
+}
+
+.login-modal {
+    background: white;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 48px;
+    padding: 2rem 1.8rem 2rem;
+    text-align: center;
+    box-shadow: 0 35px 50px rgba(0, 50, 30, 0.3);
+    border-top: 5px solid #2ecc71;
+    border-bottom: 5px solid #1e6ec5;
+    transform: scale(0.96);
+    transition: transform 0.2s;
+}
+
+.active-modal .login-modal {
+    transform: scale(1);
+}
+
+.login-modal h3 {
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #0f6b3a, #1a73e8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.login-modal p {
+    color: #2d5a4a;
+    margin-bottom: 1.5rem;
+}
+
+.mock-input {
+    background: #f1f9fe;
+    border-radius: 60px;
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    border: 1px solid #b9dfcd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #306b54;
+    font-weight: 500;
+}
+
+.demo-note {
+    font-size: 0.8rem;
+    background: #eef3fc;
+    padding: 0.5rem;
+    border-radius: 24px;
+    margin: 0.8rem 0;
+    color: #136b3e;
+}
+
+.modal-login-action {
+    background: linear-gradient(95deg, #0f6b3a, #1a73e8);
+    border: none;
+    padding: 0.8rem;
+    width: 100%;
+    border-radius: 60px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 0.8rem;
+}
+
+.modal-login-action:hover {
+    background: #0a572f;
+}
+
+.close-modal {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: #436b5c;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+/* responsive */
+@media (max-width: 650px) {
+    .page-wrapper {
+        padding: 1rem;
+    }
+    .brand h1 {
+        font-size: 1.6rem;
+    }
+    .login-btn {
+        padding: 0.5rem 1.2rem;
+    }
+}
+
+footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #2c6e55;
+    border-top: 1px solid #c0e0d0;
+    padding-top: 1.5rem;
+}
