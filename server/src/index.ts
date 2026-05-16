@@ -1,23 +1,30 @@
 import express from 'express'
 import type { Request, Response } from 'express'
+import cors  from 'cors'
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 
-type Produto = { id: number; nome: string; preco: number };
+type Produto = { 
+    id: number;
+    name: string;
+    desc: string;
+    price: number;
+};
 
 let produtos: Produto[] = [
-    { id: 1, nome: 'mouse', preco: 89.90 },
-    { id: 2, nome: 'teclado', preco: 199.90 },
+    { id: 1, name: 'Mouse',desc:'lorem ipsum bablablabla', price: 49.99 },
+    { id: 2, name: 'Teclado',desc:'lorem ipsum bablablabla', price: 99.99 },
+    { id: 3, name: 'Monitor',desc:'lorem ipsum bablablabla', price: 499.99 },
 ];
-
-let proximoId = 3;
 
 app.get('/produtos', (req: Request, res: Response) => {
     res.json(produtos);
 });
+1
 app.get('/produtos/:id', (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const produto = produtos.find(p => p.id === id);
@@ -29,23 +36,24 @@ app.get('/produtos/:id', (req: Request, res: Response) => {
 });
 
 app.post('/produtos', (req: Request, res: Response) => {
-    const { nome, preco } = req.body;
+    const { name, desc, price } = req.body;
     
-    if (!nome || preco === undefined) {
-        res.status(400).json({ erro: 'Nome e preço são obrigatórios.' });
+    if (!name || price === undefined) {
+        res.status(400).json({ erro: 'name e preço são obrigatórios.' });
         return;
     }
+    let proximoId = produtos.length == 0 ? 1: produtos.length+1;
 
-    const novo: Produto = { id: proximoId++, nome, preco };
+    const novo: Produto = { id: proximoId++, name, desc, price };
     produtos.push(novo);
     res.status(201).json(novo);
 });
 
 app.put('/produtos/:id', (req: Request, res: Response) => {
     const id = Number(req.params.id);
-    const { nome, preco } = req.body;
+    const { name, desc, price } = req.body;
 
-    if (!nome || preco === undefined) {
+    if (!name || price === undefined) {
         res.status(400).json({ erro: 'Envie todos os campos.' });
         return;
     }
@@ -57,7 +65,7 @@ app.put('/produtos/:id', (req: Request, res: Response) => {
         return;
     }
 
-    produtos[indice] = { id, nome, preco };
+    produtos[indice] = { id, name, desc, price };
     res.json(produtos[indice]);
 });
 

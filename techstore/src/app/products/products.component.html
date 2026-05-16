@@ -1,1 +1,33 @@
-<p>Isso aqui é um produto mas ele é um componente tb</p>
+<div class="main-container">   
+    <ul class="lista1">
+        <li *ngFor="let produto of produtos" class="product-card" style="list-style: none;">
+            <h3 class="product-title">{{ produto.name }}</h3>
+            <p class="product-desc">{{ produto.desc }}</p>
+            <p class="price">{{ produto.price }}</p>
+            <app-botao-comprar></app-botao-comprar>
+        </li>
+    </ul>
+    <div class="novoProduto">
+        <div class="toggle-button-wrapper">
+            <button class="btn-toggle" (click)="mostrarForm = !mostrarForm">
+                 {{ mostrarForm ? 'Cancelar' : 'Adicionar Produto' }}
+            </button>
+        </div>
+        <div *ngIf="mostrarForm" class="form-container">
+            <form class="formulario" [formGroup]="produtoForm" (ngSubmit)="adicionarProdutos(); mostrarForm = false">
+                <div>
+                    <input type="text" formControlName="name" placeholder="Digite o nome do produto" autocomplete="off">
+                </div>
+                <div>
+                    <input type="text" formControlName="desc" placeholder="Digite uma descrição" autocomplete="off">
+                </div>
+                <div>
+                    <input type="number" formControlName="price" placeholder="Digite o preço" step="0.01">
+                </div>
+                <button type="submit" [disabled]="produtoForm.invalid" class="btn-secondary">
+                    Salvar produto
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
