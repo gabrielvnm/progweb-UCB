@@ -15,49 +15,53 @@ git push origin nome-branch
 git push -u origin nova-branch
 ```
 
-
-### ~/index.html
-essa pasta tem só o protótipo do projeto em index.html, referenciando o style.css e script.js no root. O objetivo é traduzir esse protótipo pra um negocio mais estruturado com Angular.js, mas deixei aqui só de referência.
-
-por algum motivo no meu ambiente em casa o firefox não ta lendo o style.css, só deu quando eu troquei o `security.fileuri.strict_origin_policy` pra false, e eu nao sei o que isso faz ao certo, não quero brincar com isso agora não
-
-a solução foi rodar um server simples em python, aí a página carrega direito
+se atualizar alguma coisa em outro computador:
 
 ```bash
-python -m http.server 8000
+git pull main
 ```
 
-inicializa o servidor com python pra pasta root, lendo o ./index.html em http://localhost:8000/
+pra abrir o projeto em outra maquina:
+
+```bash
+git clone https://github.com/gabrielvnm/progweb-UCB.git
+```
+lembrando que tem que ter angular versao 14, node versao compativel (16 da certo), e isso pode dar treta se tiver outra versão do angular instalada localmente
+
 
 ### /techstore
 
-Essa pasta é o projeto em si, 
+Essa pasta é o front, usando angular 14 
 
 ```bash
+npm install
 npm start
+ls node_modules
+
 ```
+se tiver em uma maquina diferente, abre o terminal na pasta /techstore e roda npm install, ls node_modules pra verificar a versão
 
-usa esse aqui pra iniciazilar o servidor na pasta /techstore no link http://localhost:4200/
+npm start inicia o servidor na pasta /techstore no link http://localhost:4200/
 
-como é um trabalho em andamento, vou colocar mais uns comandos aqui eventualmente
 
-```bash
-ng generate component nome-componente
-```
-cria um componente em uma pasta
 
 ### /server
 
-essa pasta aqui é principalmente pra continuar o backend do projeto, os computadores da universidade são resetados toda semana aí pra não ter que começar o projeto do zero é só pegar os negocios dessa pasta
+essa pasta aqui é o backend, os computadores da universidade são resetados toda semana aí pra não ter que começar o projeto do zero é só pegar os negocios dessa pasta
+
+nao adicionei o node_modules no .gitignore pra conseguir rodar mais facil em outra maquina
 
 ```bash
 npm run dev
+npm install
+npm install express
+rm -rf node_modules
 ```
 
-inicializa o servidor da pasta server, roda em http://localhost:3000/
+pra instalar as dependencias, abre o terminal na pasta /server e da um npm install, se der erro tenta rm -rf node_modules antes e depois npm install
+npm run dev inicializa o servidor da pasta server, roda em http://localhost:3000/
 
 http://localhost:3000/produtos/
 
-aqui é a API de produtos pra mandar as requisições pelo postman
+aqui é a API de produtos pra mandar as requisições pelo postman ou algum outro negocio de API
 
-#
