@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../angular"
+		},
+		{
+			"path": "../../../../angular14"
+		}
+	],
+	"settings": {}
+}
