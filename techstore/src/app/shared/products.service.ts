@@ -16,10 +16,10 @@ export class Products{
     adicionarProduto(produto:Produto):Observable<Produto>{
         return this.http.post<Produto>(this.apiURL,produto)
     }
-    atualizarProdutos(produto:Produto):Observable<Produto>{
-        return this.http.put<Produto>(this.apiURL+produto.id,produto)
+    atualizarProduto(id: number, produto: Produto): Observable<Produto> {
+        return this.http.put<Produto>(`${this.apiURL}${id}`, produto);
     }
-    deletarProdutos(id:number):Observable<Produto>{
-        return this.http.delete<Produto>(this.apiURL+id)
+    deletarProduto(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiURL}${id}`);
     }
 }
