@@ -6,7 +6,7 @@ import { Produto } from "../types/produtos";
 @Injectable({providedIn:'root'})
 
 export class Products{
-    apiURL = 'http://localhost:3000/produtos/'
+    apiURL = 'http://localhost:3000/produtos'
 
     constructor(private http:HttpClient){}
 
@@ -17,9 +17,9 @@ export class Products{
         return this.http.post<Produto>(this.apiURL,produto)
     }
     atualizarProduto(id: number, produto: Produto): Observable<Produto> {
-        return this.http.put<Produto>(`${this.apiURL}${id}`, produto);
+        return this.http.put<Produto>(`${this.apiURL}/${id}`, produto);
     }
     deletarProduto(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiURL}${id}`);
+        return this.http.delete<void>(`${this.apiURL}/${id}`);
     }
 }
