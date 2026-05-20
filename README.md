@@ -3,7 +3,7 @@
 Matéria de extensão - Programação Web da Universidade Católica de Brasília, 2026
 branch prod: branch mais atualizada, backend conectado com banco de dados
 
-## Comandos uteis
+## Inicialização
 Passos para inicialização do projeto.
 
 Clonar o projeto na máquina atual:
