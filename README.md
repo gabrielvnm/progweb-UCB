@@ -21,7 +21,7 @@ nvm list
 nvm list para listar as versões instaladas, os outros comandos instalam as versões necessárias. Para inicializar o front e o back, navegue pelo terminal até o root das pastas /techstore e /database antes de rodar os comandos.
 
 
-### /techstore
+### /lojatecg
 
 Essa pasta contem o frontend, usando angular 14. É necessário trocar a versão do node para 16.
 
