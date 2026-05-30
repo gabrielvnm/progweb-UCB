@@ -5,16 +5,17 @@ import { ProductsComponent } from './products/products.component';
 import { TestandoComponent } from './testando/testando.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { ContatoComponent } from './contato/contato.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   { path: "produtos", component: ProductsComponent },
   { path: "testando", component: TestandoComponent },
   { path: "carrinho", component: CarrinhoComponent },
   { path: "contato", component: ContatoComponent },
-  { path: '**', redirectTo: '/home' } 
+  { path: '**', component: NotFoundComponent} 
 ]
 
 @NgModule({

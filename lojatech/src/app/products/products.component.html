@@ -27,14 +27,20 @@
             <p class="price">{{ produto.price }}</p>
             <ul class="botoes-lista">
                 <div class="toggle-button-wrapper">
-                    <button class="btn btn-primary">Comprar</button>
+                    <button class="btn-toggle" (click)="comprarAgora(produto)">Comprar</button>
+                </div>
+                <div class="toggle-button-wrapper">
+                    <button class="btn-toggle" (click)="adicionarAoCarrinho(produto)">
+                        Adicionar ao Carrinho
+                    </button>
                 </div>
                 <div class="toggle-button-wrapper" *ngIf="admin">            
                     <button class="btn-toggle" (click)="prepararAtualizacao(produto)">Editar</button>
                 </div>
                 <div class="toggle-button-wrapper" *ngIf="admin">
-                    <button class="btn-primary" (click)="excluirProduto(produto.id!)">Excluir</button>
+                    <button class="btn-toggle" (click)="excluirProduto(produto.id!)">Excluir</button>
                 </div>
+                
             </ul>
         </li>
     </ul>

@@ -8,6 +8,7 @@ import { Produto } from "../types/produtos";
 export class Products{
     apiURL = 'http://localhost:3000/produtos'
 
+
     constructor(private http:HttpClient){}
 
     listarProdutos():Observable<Produto[]>{

@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { ContatoComponent } from './contato/contato.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ContatoComponent } from './contato/contato.component';
     TestandoComponent,
     CarrinhoComponent,
     UnderConstructionComponent,
-    ContatoComponent
+    ContatoComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Produto } from '../types/produtos';
 import { Products } from '../shared/products.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { CarrinhoService, IProdutoCarrinho } from '../carrinho.service';
 
 @Component({
   selector: 'app-products',
@@ -23,7 +24,8 @@ export class ProductsComponent implements OnInit{
   constructor(
     private products:Products,
     private fb:FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private carrinhoService: CarrinhoService
   ) {}
   
   //on init que carrega os formularios e os produtos
@@ -67,10 +69,35 @@ export class ProductsComponent implements OnInit{
   //   console.log('Is admin:', this.admin);
   // }
 
-   // Optional: Method to toggle admin for testing
+  // metodo temporario pra simular autenticação
   toggleAdminMode() {
     this.admin = !this.admin;
     console.log('Admin mode:', this.admin);
+  }
+
+  adicionarAoCarrinho(produto: Produto): void {
+    const produtoCarrinho: IProdutoCarrinho = {
+      id: produto.id!,
+      name: produto.name,
+      desc: produto.desc,
+      price: produto.price,
+      quantidade: 1  
+    };
+    this.carrinhoService.adicionarAoCarrinho(produtoCarrinho);
+    
+    console.log(`${produto.name} adicionado ao carrinho!`);
+  }
+
+  comprarAgora(produto: Produto): void{
+    const produtoCarrinho: IProdutoCarrinho = {
+      id: produto.id!,
+      name: produto.name,
+      desc: produto.desc,
+      price: produto.price,
+      quantidade: 1  
+    };
+    this.carrinhoService.adicionarAoCarrinho(produtoCarrinho);
+    
   }
 
   // metodo pra fazer o GET
