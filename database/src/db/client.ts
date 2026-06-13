@@ -5,3 +5,4 @@ import * as schema from './schema.js'
 const sqlite = new Database('produtos.db')
 
 export const db = drizzle({ client: sqlite, schema })
+

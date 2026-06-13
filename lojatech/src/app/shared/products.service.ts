@@ -6,7 +6,7 @@ import { Produto } from "../types/produtos";
 @Injectable({providedIn:'root'})
 
 export class Products{
-    apiURL = 'http://localhost:3000/produtos'
+    apiURL = '/api/produtos'
 
 
     constructor(private http:HttpClient){}
