@@ -43,37 +43,22 @@ export class ProductsComponent implements OnInit{
       price:[0,Validators.required],
     })
 
-    // this.checkAdminStatus();
+    this.admin = this.authService.isAdmin();
 
-    // Subscribe to admin status changes
-    this.authService.admin().subscribe(admin => {
-      this.admin = admin;
-      console.log('Admin status changed:', admin);
+    this.authService.currentUser$.subscribe(user => {
+      this.admin = user?.role === 'admin';
+      console.log('Admin status updated:', this.admin);
     });
+
 
     this.carregarProdutos();
   }
 
-  //metodo pra verificar acesso
-  // checkAdminStatus() {
-
-  //   const user = localStorage.getItem('user');
-  //   if (user) {
-  //     const userData = JSON.parse(user);
-  //     this.admin = userData.role === 'admin' || userData.admin === true;
-  //   }
-
-  //   // Method 2: Check from a service
-  //   // this.authService.admin().subscribe(admin => this.admin = admin);
-    
-  //   console.log('Is admin:', this.admin);
-  // }
-
   // metodo temporario pra simular autenticação
-  toggleAdminMode() {
-    this.admin = !this.admin;
-    console.log('Admin mode:', this.admin);
-  }
+  // toggleAdminMode() {
+  //   this.admin = !this.admin;
+  //   console.log('Admin mode:', this.admin);
+  // }
 
   adicionarAoCarrinho(produto: Produto): void {
     const produtoCarrinho: IProdutoCarrinho = {
